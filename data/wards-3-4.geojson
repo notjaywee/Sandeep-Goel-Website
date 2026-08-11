@@ -1,0 +1,31 @@
+{
+  "type": "FeatureCollection",
+  "name": "wards-3-4-combined",
+  "properties": {
+    "source": "Hand-built from the campaign literature's own ward map (street-boundary labels) plus OpenStreetMap/Nominatim geocoding of two real anchor points (8850 McLaughlin Rd S; Steeles Ave W & Mavis Rd). Brampton GeoHub's published 'Ward Boundaries' dataset could not be pulled programmatically (its dataset page is JS-rendered/ArcGIS Hub and its listed data is dated Dec 1, 2014, predating recent ward boundary reviews), and OpenStreetMap Nominatim does not support precise street-intersection geocoding. This polygon is therefore a best-effort approximation, not survey-grade data.",
+    "verification_needed": "Before treating the ward lookup tool as authoritative, cross-check/replace these coordinates against the City of Brampton's current official Wards 3 & 4 boundary (e.g. via GeoHub's interactive map export or a GIS tool), confirmed current for the 2026 election."
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Wards 3 & 4",
+        "description": "Combined outline of Ward 3 and Ward 4, City of Brampton"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-79.7660, 43.6950],
+            [-79.6870, 43.6950],
+            [-79.6870, 43.6390],
+            [-79.7500, 43.6390],
+            [-79.7500, 43.6480],
+            [-79.7660, 43.6480],
+            [-79.7660, 43.6950]
+          ]
+        ]
+      }
+    }
+  ]
+}
