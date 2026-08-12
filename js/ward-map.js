@@ -6,17 +6,18 @@
 
   var WARD_DATA_URL = "data/wards-3-4.geojson";
   var STYLE_URL = "https://tiles.openfreemap.org/styles/liberty";
-  var CENTER = [-79.725, 43.664];
+  var GOLD = "#f2c230";
+  var NAVY = "#1b2a52";
 
   var LANDMARKS = [
     {
-      name: "Downtown Brampton / Gage Park",
-      note: "Ward 3 anchor",
+      name: "Gage Park",
+      note: "Downtown Brampton — Ward 3 anchor",
       lng: -79.7581,
       lat: 43.6837,
     },
     {
-      name: "Flower City Community Campus",
+      name: "Flower City Campus",
       note: "8850 McLaughlin Rd S — Ward 4 anchor",
       lng: -79.7442,
       lat: 43.6567,
@@ -26,68 +27,100 @@
   var map = new maplibregl.Map({
     container: "ward-map",
     style: STYLE_URL,
-    center: CENTER,
-    zoom: 11.6,
+    zoom: 11,
+    center: [-79.745, 43.66],
     attributionControl: true,
   });
 
   map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
 
-  var wardPolygon = null; // first ring of coordinates, kept for point-in-polygon checks
+  /* ---------- Zoom-reset control ---------- */
+  var wardBounds = null;
+  function ResetControl() {}
+  ResetControl.prototype.onAdd = function (mapInstance) {
+    this._map = mapInstance;
+    this._btn = document.createElement("button");
+    this._btn.type = "button";
+    this._btn.className = "maplibregl-ctrl-icon map-reset-btn";
+    this._btn.setAttribute("aria-label", "Reset map view");
+    this._btn.textContent = "⟲";
+    this._btn.addEventListener("click", function () {
+      if (wardBounds) mapInstance.fitBounds(wardBounds, { padding: 32, duration: 800 });
+    });
+    this._container = document.createElement("div");
+    this._container.className = "maplibregl-ctrl maplibregl-ctrl-group";
+    this._container.appendChild(this._btn);
+    return this._container;
+  };
+  ResetControl.prototype.onRemove = function () {
+    this._container.parentNode.removeChild(this._container);
+    this._map = undefined;
+  };
+  map.addControl(new ResetControl(), "top-right");
+
+  var wardUnion = null; // single dissolved Turf feature, used for display + point-in-polygon
   var searchMarker = null;
+
+  function pillMarker(landmark) {
+    var el = document.createElement("div");
+    el.className = "map-pin-pill";
+    el.innerHTML =
+      '<span class="map-pin-dot"></span><span class="map-pin-label">' + landmark.name + "</span>";
+    var popup = new maplibregl.Popup({ offset: 14 }).setHTML(
+      "<strong>" + landmark.name + "</strong><br>" + landmark.note
+    );
+    new maplibregl.Marker({ element: el, anchor: "left" })
+      .setLngLat([landmark.lng, landmark.lat])
+      .setPopup(popup)
+      .addTo(map);
+  }
 
   map.on("load", function () {
     fetch(WARD_DATA_URL)
       .then(function (res) { return res.json(); })
       .then(function (geojson) {
-        map.addSource("wards", { type: "geojson", data: geojson });
+        var ward3 = geojson.features[0];
+        var ward4 = geojson.features[1];
+
+        wardUnion =
+          typeof turf !== "undefined" ? turf.union(ward3, ward4) : ward3;
+
+        var displaySource = {
+          type: "FeatureCollection",
+          features: [wardUnion],
+        };
+
+        map.addSource("wards", { type: "geojson", data: displaySource });
 
         map.addLayer({
           id: "wards-fill",
           type: "fill",
           source: "wards",
-          paint: { "fill-color": "#1b2a52", "fill-opacity": 0.16 },
+          paint: { "fill-color": NAVY, "fill-opacity": 0.08 },
         });
 
         map.addLayer({
           id: "wards-outline",
           type: "line",
           source: "wards",
-          paint: { "line-color": "#c8102e", "line-width": 2.5 },
+          paint: { "line-color": GOLD, "line-width": 3 },
         });
 
-        var feature = geojson.features && geojson.features[0];
-        if (feature && feature.geometry && feature.geometry.type === "Polygon") {
-          wardPolygon = feature.geometry.coordinates;
+        if (typeof turf !== "undefined") {
+          var bbox = turf.bbox(wardUnion);
+          wardBounds = [
+            [bbox[0], bbox[1]],
+            [bbox[2], bbox[3]],
+          ];
+          map.fitBounds(wardBounds, { padding: 32, duration: 0 });
         }
       })
       .catch(function (err) {
         console.error("Could not load ward boundary:", err);
       });
 
-    LANDMARKS.forEach(function (landmark) {
-      var popup = new maplibregl.Popup({ offset: 18 }).setHTML(
-        '<strong>' + landmark.name + '</strong><br>' + landmark.note
-      );
-      new maplibregl.Marker({ color: "#1b2a52" })
-        .setLngLat([landmark.lng, landmark.lat])
-        .setPopup(popup)
-        .addTo(map);
-    });
+    LANDMARKS.forEach(pillMarker);
   });
-
-  /* ---------- Point in polygon (ray casting, single-ring polygon) ---------- */
-  function pointInPolygon(point, ring) {
-    var x = point[0], y = point[1];
-    var inside = false;
-    for (var i = 0, j = ring.length - 1; i < ring.length; j = i++) {
-      var xi = ring[i][0], yi = ring[i][1];
-      var xj = ring[j][0], yj = ring[j][1];
-      var intersect = yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi;
-      if (intersect) inside = !inside;
-    }
-    return inside;
-  }
 
   /* ---------- Address lookup via Nominatim ---------- */
   var form = document.getElementById("lookup-form");
@@ -126,12 +159,17 @@
           var lat = parseFloat(results[0].lat);
 
           if (searchMarker) searchMarker.remove();
-          searchMarker = new maplibregl.Marker({ color: "#c8102e" }).setLngLat([lng, lat]).addTo(map);
+          searchMarker = new maplibregl.Marker({ color: GOLD }).setLngLat([lng, lat]).addTo(map);
           map.flyTo({ center: [lng, lat], zoom: 14, duration: 1200 });
 
-          if (wardPolygon && pointInPolygon([lng, lat], wardPolygon[0])) {
+          var isInside = false;
+          if (wardUnion && typeof turf !== "undefined") {
+            isInside = turf.booleanPointInPolygon(turf.point([lng, lat]), wardUnion);
+          }
+
+          if (wardUnion && isInside) {
             setResult("Good news — that address is in Wards 3 & 4! Sandeep would love your support. Scroll down to get involved.", "in");
-          } else if (wardPolygon) {
+          } else if (wardUnion) {
             setResult("That address looks to be outside Wards 3 & 4 — but everyone's welcome to follow along and share the campaign.", "out");
           } else {
             setResult("Found it on the map — the ward boundary is still loading, so we can't confirm which ward yet.", "out");

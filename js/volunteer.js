@@ -41,7 +41,7 @@
 
   function showMessage(text, isError) {
     formMsg.textContent = text;
-    formMsg.style.color = isError ? "#8a5a00" : "var(--red)";
+    formMsg.style.color = isError ? "#8a5a00" : "var(--gold-deep)";
     formMsg.classList.add("show");
   }
 
