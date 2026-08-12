@@ -6,7 +6,7 @@
 
   var WARD_DATA_URL = "data/wards-3-4.geojson";
   var STYLE_URL = "https://tiles.openfreemap.org/styles/liberty";
-  var GOLD = "#f2c230";
+  var GOLD = "#FFB000";
   var NAVY = "#1b2a52";
 
   var LANDMARKS = [
