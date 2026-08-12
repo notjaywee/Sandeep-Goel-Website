@@ -1,0 +1,7 @@
+# Raw/source media dropped for editing — only processed output under images/ or data/ ships
+brand_assets/*.mp4
+brand_assets/*.mov
+brand_assets/*.mkv
+
+# Local tooling config
+.claude/
