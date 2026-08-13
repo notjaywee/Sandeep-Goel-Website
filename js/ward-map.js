@@ -10,7 +10,7 @@
   var STYLE_URL = "https://tiles.openfreemap.org/styles/positron";
   var GOLD = "#FFB000";
   var NAVY = "#1b2a52";
-  var MASK_COLOR = "#eef1f8"; // matches --navy-tint
+  var MASK_COLOR = "#1b2a52"; // matches --navy
 
   /* Bounding box used to bias/restrict the address lookup to the Brampton
      area — reused for both the Nominatim query and the client-side sanity
@@ -31,6 +31,18 @@
       note: "8850 McLaughlin Rd S — Ward 4 anchor",
       lng: -79.7442,
       lat: 43.6567,
+    },
+    {
+      name: "Eldorado Park",
+      note: "Creditview Road — Ward 4 anchor",
+      lng: -79.780087,
+      lat: 43.6451709,
+    },
+    {
+      name: "Sri Guru Nanak Sikh Centre",
+      note: "99 Glidden Road — Ward 3 anchor",
+      lng: -79.7161397,
+      lat: 43.694299,
     },
   ];
 
@@ -124,7 +136,7 @@
               id: "ward-spotlight-mask-layer",
               type: "fill",
               source: "ward-spotlight-mask",
-              paint: { "fill-color": MASK_COLOR, "fill-opacity": 0.75 },
+              paint: { "fill-color": MASK_COLOR, "fill-opacity": 0.4 },
             },
             "wards-outline"
           );
