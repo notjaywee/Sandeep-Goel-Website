@@ -64,6 +64,34 @@
   tickCountdown();
   setInterval(tickCountdown, 1000);
 
+  /* ---------- About section shorts embed ----------
+     TODO before launch: set VIDEO_URL to the real YouTube Shorts/video URL
+     once supplied (v8 §1). Until then the placeholder card stays as-is.
+     Matches devvashi.ca's actual live "short-frame" component, which is a
+     bare youtube-nocookie.com iframe in this same wrapper — not the
+     avatar/title-overlay/play-button/share-icon card described in the v8
+     spec text. Flagging this: the spec's written description doesn't match
+     what's actually live on the reference site. */
+  (function () {
+    var VIDEO_URL = ""; // e.g. "https://www.youtube.com/shorts/XXXXXXXXXXX"
+    var embedEl = document.getElementById("short-embed");
+    var linkEl = document.getElementById("short-link");
+    if (!embedEl || !VIDEO_URL) return;
+
+    var match = VIDEO_URL.match(/(?:shorts\/|v=|youtu\.be\/)([a-zA-Z0-9_-]{6,})/);
+    if (!match) return;
+
+    var iframe = document.createElement("iframe");
+    iframe.src = "https://www.youtube-nocookie.com/embed/" + match[1] + "?rel=0&modestbranding=1&playsinline=1";
+    iframe.title = "Sandeep Kumar Goel — campaign video";
+    iframe.loading = "lazy";
+    iframe.allow = "encrypted-media; picture-in-picture; web-share; fullscreen";
+    iframe.allowFullscreen = true;
+    embedEl.innerHTML = "";
+    embedEl.appendChild(iframe);
+    if (linkEl) linkEl.href = VIDEO_URL;
+  })();
+
   /* ---------- Scroll reveal ---------- */
   var revealEls = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window) {
