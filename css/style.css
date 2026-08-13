@@ -882,3 +882,23 @@ section { position: relative; }
   .signup-form { padding: 24px; }
   .contact-panel { padding: 26px; }
 }
+
+/* ---------- Social icon link override (must win over .footer-col a and .nav-links a) ---------- */
+.header-social .social-icon a,
+.mobile-menu .social-icon a,
+.footer-social-row .social-icon a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-size: inherit;
+  color: inherit;
+}
+.header-social .social-icon a:hover,
+.mobile-menu .social-icon a:hover,
+.footer-social-row .social-icon a:hover {
+  color: inherit;
+  background: none;
+}
