@@ -10,6 +10,14 @@
   var STYLE_URL = "https://tiles.openfreemap.org/styles/positron";
   var GOLD = "#FFB000";
   var NAVY = "#1b2a52";
+  var MASK_COLOR = "#eef1f8"; // matches --navy-tint
+
+  /* Bounding box used to bias/restrict the address lookup to the Brampton
+     area — reused for both the Nominatim query and the client-side sanity
+     check on the result. */
+  var SEARCH_BOUNDS = { west: -79.90, north: 43.78, east: -79.60, south: 43.58 };
+  var SEARCH_VIEWBOX =
+    SEARCH_BOUNDS.west + "," + SEARCH_BOUNDS.north + "," + SEARCH_BOUNDS.east + "," + SEARCH_BOUNDS.south;
 
   var LANDMARKS = [
     {
@@ -109,6 +117,18 @@
         });
 
         if (typeof turf !== "undefined") {
+          var maskPolygon = turf.mask(wardUnion);
+          map.addSource("ward-spotlight-mask", { type: "geojson", data: maskPolygon });
+          map.addLayer(
+            {
+              id: "ward-spotlight-mask-layer",
+              type: "fill",
+              source: "ward-spotlight-mask",
+              paint: { "fill-color": MASK_COLOR, "fill-opacity": 0.75 },
+            },
+            "wards-outline"
+          );
+
           var bbox = turf.bbox(wardUnion);
           wardBounds = [
             [bbox[0], bbox[1]],
@@ -134,24 +154,42 @@
     resultEl.className = "lookup-result show status-" + status;
   }
 
+  var POSTAL_CODE_RE = /^[A-Za-z]\d[A-Za-z]\s*\d[A-Za-z]\d$/;
+
+  function buildLookupQuery(q) {
+    return /brampton/i.test(q) ? q : q + ", Brampton, Ontario, Canada";
+  }
+
+  function geocode(q) {
+    var url =
+      "https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=ca" +
+      "&viewbox=" + SEARCH_VIEWBOX + "&bounded=1&q=" +
+      encodeURIComponent(buildLookupQuery(q));
+    return fetch(url).then(function (res) { return res.json(); });
+  }
+
   if (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var query = input.value.trim();
       if (!query) return;
-      if (!/brampton/i.test(query)) query += ", Brampton, Ontario, Canada";
+
+      // Full 6-character postal codes have sparse coverage in OSM's Canadian
+      // data; the FSA (first 3 characters) resolves much more reliably.
+      var isPostalCode = POSTAL_CODE_RE.test(query);
+      var fsaFallback = isPostalCode ? query.slice(0, 3).toUpperCase() : null;
 
       var submitBtn = form.querySelector('button[type="submit"]');
       submitBtn.disabled = true;
       setResult("Looking that up…", "out");
 
-      var url =
-        "https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=ca" +
-        "&viewbox=-79.90,43.78,-79.60,43.58&bounded=0&q=" +
-        encodeURIComponent(query);
-
-      fetch(url)
-        .then(function (res) { return res.json(); })
+      geocode(query)
+        .then(function (results) {
+          if ((!results || results.length === 0) && fsaFallback) {
+            return geocode(fsaFallback);
+          }
+          return results;
+        })
         .then(function (results) {
           if (!results || results.length === 0) {
             setResult("We couldn't find that address. Try adding more detail, like a postal code.", "error");
@@ -159,6 +197,15 @@
           }
           var lng = parseFloat(results[0].lon);
           var lat = parseFloat(results[0].lat);
+
+          var withinSearchArea =
+            lng >= SEARCH_BOUNDS.west && lng <= SEARCH_BOUNDS.east &&
+            lat >= SEARCH_BOUNDS.south && lat <= SEARCH_BOUNDS.north;
+
+          if (!withinSearchArea) {
+            setResult("Couldn't find that postal code — try your full street address instead.", "error");
+            return;
+          }
 
           if (searchMarker) searchMarker.remove();
           searchMarker = new maplibregl.Marker({ color: GOLD }).setLngLat([lng, lat]).addTo(map);
