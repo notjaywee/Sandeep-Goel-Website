@@ -319,15 +319,24 @@ section { position: relative; }
   display: grid;
   grid-template-columns: 1fr 1.35fr;
   gap: var(--space-5);
-  align-items: center;
+  align-items: start;
 }
 .bio-text .eyebrow { margin-bottom: 16px; }
 .bio-text h2 { font-size: clamp(2.2rem, 5.5vw, 4.2rem); margin-bottom: 22px; }
 .bio-text p { color: var(--ink-soft); margin-bottom: 16px; font-size: 1.05rem; }
 .bio-text p:last-child { margin-bottom: 0; }
+.bio-text .btn { margin-top: var(--space-2); }
 
 /* ---------- Short-frame (vertical video embed) ---------- */
 .short-frame { max-width: 460px; margin: 0 auto; }
+@media (min-width: 981px) {
+  /* Lines the card's top edge up with the headline instead of the eyebrow pill,
+     now that .bio-grid is align-items: start. Only applies in the two-column
+     layout — once .bio-grid stacks to one column at <=980px, the card sits
+     below the text and this offset has nothing to align with, so it would
+     just read as a stray gap. */
+  .short-frame { margin: 44px auto 0; }
+}
 .short-visual { position: relative; }
 .short-shadow {
   position: absolute;
