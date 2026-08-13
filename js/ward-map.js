@@ -154,7 +154,10 @@
     resultEl.className = "lookup-result show status-" + status;
   }
 
-  var POSTAL_CODE_RE = /^[A-Za-z]\d[A-Za-z]\s*\d[A-Za-z]\d$/;
+  function isBarePostalCode(value) {
+    // Canadian postal code pattern, with or without a space: L6X 1A1 or L6X1A1
+    return /^[A-Za-z]\d[A-Za-z]\s?\d[A-Za-z]\d$/.test(value.trim());
+  }
 
   function buildLookupQuery(q) {
     return /brampton/i.test(q) ? q : q + ", Brampton, Ontario, Canada";
@@ -174,10 +177,10 @@
       var query = input.value.trim();
       if (!query) return;
 
-      // Full 6-character postal codes have sparse coverage in OSM's Canadian
-      // data; the FSA (first 3 characters) resolves much more reliably.
-      var isPostalCode = POSTAL_CODE_RE.test(query);
-      var fsaFallback = isPostalCode ? query.slice(0, 3).toUpperCase() : null;
+      if (isBarePostalCode(query)) {
+        setResult("Please enter your full street address — postal code lookup isn't supported.", "error");
+        return;
+      }
 
       var submitBtn = form.querySelector('button[type="submit"]');
       submitBtn.disabled = true;
@@ -185,14 +188,8 @@
 
       geocode(query)
         .then(function (results) {
-          if ((!results || results.length === 0) && fsaFallback) {
-            return geocode(fsaFallback);
-          }
-          return results;
-        })
-        .then(function (results) {
           if (!results || results.length === 0) {
-            setResult("We couldn't find that address. Try adding more detail, like a postal code.", "error");
+            setResult("We couldn't find that address. Try adding more detail, like a nearby cross street.", "error");
             return;
           }
           var lng = parseFloat(results[0].lon);
@@ -203,7 +200,7 @@
             lat >= SEARCH_BOUNDS.south && lat <= SEARCH_BOUNDS.north;
 
           if (!withinSearchArea) {
-            setResult("Couldn't find that postal code — try your full street address instead.", "error");
+            setResult("We couldn't find that address. Try double-checking the spelling or adding more detail.", "error");
             return;
           }
 
