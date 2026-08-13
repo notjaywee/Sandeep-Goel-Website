@@ -208,6 +208,7 @@ section { position: relative; }
 .hero {
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -688,7 +689,7 @@ section { position: relative; }
 .lookup-row { display: flex; gap: 8px; }
 .lookup-row input {
   flex: 1; padding: 12px 14px; border-radius: 10px;
-  border: none; background: var(--surface); font-family: var(--font-body); font-size: 0.95rem;
+  border: none; background: var(--surface); font-family: var(--font-body); font-size: 16px;
 }
 .lookup-row input:focus-visible { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(27,42,82,0.12); }
 .lookup-row button { flex-shrink: 0; padding: 12px 18px; }
@@ -860,7 +861,7 @@ section { position: relative; }
 .field label .req { color: var(--gold-deep); }
 .field input[type="text"], .field input[type="tel"], .field input[type="email"] {
   padding: 13px 14px; border-radius: 10px;
-  border: none; background: var(--surface); font-family: var(--font-body); font-size: 0.95rem;
+  border: none; background: var(--surface); font-family: var(--font-body); font-size: 16px;
 }
 .field input:focus-visible { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(27,42,82,0.12); }
 .field-note { font-size: 0.78rem; color: var(--ink-soft); }
@@ -955,6 +956,7 @@ section { position: relative; }
   .bio-grid { grid-template-columns: 1fr; }
   .commitment-grid { grid-template-columns: repeat(3, 1fr); }
   .priorities-row { grid-template-columns: 1fr; }
+  .priority-featured-watermark { font-size: 10rem; }
   .election-grid { grid-template-columns: 1fr; }
   .map-layout { grid-template-columns: 1fr; }
   #ward-map { height: 420px; }
@@ -965,7 +967,7 @@ section { position: relative; }
 @media (max-width: 720px) {
   .nav-links { display: none; }
   .nav-toggle { display: flex; }
-  .commitment-grid { grid-template-columns: repeat(2, 1fr); }
+  .commitment-grid { grid-template-columns: 1fr; }
   .field-row { grid-template-columns: 1fr; }
   .task-cards { grid-template-columns: 1fr 1fr; gap: 14px; }
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -984,6 +986,7 @@ section { position: relative; }
   .bio-section, .issues-section, .map-section, .gallery-section, .involve-section, .follow-section, .commitment-section, .election-band { padding: var(--space-4) 0; }
   .signup-form { padding: 24px; }
   .contact-panel { padding: 26px; }
+  .task-cards { grid-template-columns: 1fr; }
 }
 
 /* ---------- Social icon link override (must win over .footer-col a and .nav-links a) ---------- */
