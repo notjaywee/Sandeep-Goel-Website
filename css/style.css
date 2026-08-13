@@ -583,6 +583,16 @@ section { position: relative; }
 .election-card ul li { color: rgba(255,255,255,0.82); font-size: 0.92rem; padding: 5px 0; border-top: 1px dashed rgba(255,255,255,0.14); }
 .election-card ul li:first-child { border-top: none; padding-top: 0; }
 .election-card ul li strong { color: var(--gold); display: block; font-family: var(--font-display); letter-spacing: 0.02em; font-size: 0.95rem; }
+.election-card-note {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed rgba(255,255,255,0.14);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.6);
+}
+.election-card-note a { color: var(--gold); text-decoration: underline; text-underline-offset: 2px; }
+.election-card-note a:hover { color: var(--white); }
 
 /* ---------- Ward map section ---------- */
 .map-section { padding: var(--space-6) 0; }
