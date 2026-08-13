@@ -121,7 +121,7 @@ section { position: relative; }
 .bar-navy .section-head p { color: rgba(255,255,255,0.78); }
 
 .text-navy { color: var(--navy); }
-.text-gold { color: var(--gold-deep); }
+.text-gold { color: var(--gold); }
 
 /* ---------- Nav ---------- */
 .site-nav {
@@ -426,23 +426,78 @@ section { position: relative; }
   margin-bottom: 14px;
 }
 
-.priorities-lead {
+.priorities-row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1.3fr 1fr;
   gap: var(--space-3);
   margin-bottom: var(--space-5);
+  align-items: stretch;
 }
-.priority-card {
+
+.priority-featured {
+  position: relative;
   background: var(--gold);
-  border-radius: var(--radius-md);
-  padding: 32px 28px;
+  border-radius: var(--radius-lg);
+  padding: 40px 36px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
   box-shadow: var(--shadow-sm);
-  border-top: 4px solid var(--navy);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
-.priority-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-.priority-card h3 { font-size: 1.15rem; text-transform: none; letter-spacing: 0; margin-bottom: 10px; line-height: 1.3; color: var(--navy-deep); }
-.priority-card p { color: var(--navy); font-size: 0.95rem; }
+.priority-featured-watermark {
+  position: absolute;
+  top: -0.1em;
+  right: 8px;
+  font-family: var(--font-display);
+  font-size: 12rem;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(16, 28, 56, 0.12);
+  pointer-events: none;
+  user-select: none;
+}
+.priority-featured-content { position: relative; z-index: 1; }
+.priority-featured-label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin-bottom: 16px;
+}
+.priority-featured-content .issue-icon { margin-bottom: 16px; }
+.priority-featured-content h3 { font-size: 1.6rem; text-transform: none; letter-spacing: 0; color: var(--navy-deep); margin-bottom: 12px; line-height: 1.2; }
+.priority-featured-content p { color: var(--navy); font-size: 1rem; max-width: 40ch; margin-bottom: 24px; }
+.priority-featured-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--navy-deep); font-weight: 600;
+  transition: gap 0.2s ease;
+}
+.priority-featured-link:hover { gap: 12px; }
+
+.priorities-compact {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.priority-compact-item {
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
+}
+.priority-compact-item:first-child { border-top: none; padding-top: 0; }
+.priority-compact-num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--gold-deep);
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.priority-compact-item h4 { font-size: 1.1rem; text-transform: none; letter-spacing: 0; color: var(--navy-deep); margin-bottom: 8px; }
+.priority-compact-item p { color: var(--ink-soft); font-size: 0.95rem; margin: 0; }
 
 .priorities-support {
   max-width: 900px;
@@ -463,7 +518,33 @@ section { position: relative; }
 .support-item h4 { font-size: 1.02rem; text-transform: none; letter-spacing: 0; margin-bottom: 6px; color: var(--navy); }
 .support-item p { color: var(--ink-soft); font-size: 0.93rem; }
 
-.receipts-cta { text-align: center; margin-top: 48px; }
+.priorities-cta-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  background: var(--navy);
+  border-radius: var(--radius-lg);
+  padding: 36px 40px;
+  margin-top: 48px;
+}
+.priorities-cta-banner h3 { color: var(--white); font-size: 1.4rem; text-transform: none; letter-spacing: 0; margin-bottom: 6px; }
+.priorities-cta-banner p { color: rgba(255,255,255,0.75); font-size: 0.95rem; margin: 0; }
+.priorities-cta-arrow {
+  flex-shrink: 0;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.4);
+  color: var(--white);
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+.priorities-cta-arrow:hover { background: var(--gold); border-color: var(--gold); color: var(--navy-deep); transform: translateX(4px); }
+
+@media (max-width: 560px) {
+  .priorities-cta-banner { flex-direction: column; align-items: flex-start; text-align: left; }
+}
 
 /* ---------- Election info ---------- */
 .election-section { padding: 0; }
@@ -852,7 +933,7 @@ section { position: relative; }
 @media (max-width: 980px) {
   .bio-grid { grid-template-columns: 1fr; }
   .commitment-grid { grid-template-columns: repeat(3, 1fr); }
-  .priorities-lead { grid-template-columns: 1fr; }
+  .priorities-row { grid-template-columns: 1fr; }
   .election-grid { grid-template-columns: 1fr; }
   .map-layout { grid-template-columns: 1fr; }
   #ward-map { height: 420px; }
@@ -868,6 +949,7 @@ section { position: relative; }
   .task-cards { grid-template-columns: 1fr 1fr; gap: 14px; }
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
   .footer-bottom-row { flex-direction: column; align-items: flex-start; }
+  .priority-featured-watermark { font-size: 7rem; }
 }
 
 @media (max-width: 560px) {
