@@ -75,7 +75,6 @@
   (function () {
     var VIDEO_URL = ""; // e.g. "https://www.youtube.com/shorts/XXXXXXXXXXX"
     var embedEl = document.getElementById("short-embed");
-    var linkEl = document.getElementById("short-link");
     if (!embedEl || !VIDEO_URL) return;
 
     var match = VIDEO_URL.match(/(?:shorts\/|v=|youtu\.be\/)([a-zA-Z0-9_-]{6,})/);
@@ -89,7 +88,6 @@
     iframe.allowFullscreen = true;
     embedEl.innerHTML = "";
     embedEl.appendChild(iframe);
-    if (linkEl) linkEl.href = VIDEO_URL;
   })();
 
   /* ---------- Scroll reveal ---------- */

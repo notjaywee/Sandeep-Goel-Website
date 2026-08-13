@@ -328,7 +328,7 @@ section { position: relative; }
 .bio-text .btn { margin-top: var(--space-2); }
 
 /* ---------- Short-frame (vertical video embed) ---------- */
-.short-frame { width: 100%; max-width: 620px; margin: 0 auto; }
+.short-frame { width: 100%; max-width: 560px; margin: 0 auto; }
 @media (min-width: 981px) {
   /* Lines the card's top edge up with the headline instead of the eyebrow pill,
      now that .bio-grid is align-items: start. Only applies in the two-column
@@ -361,17 +361,6 @@ section { position: relative; }
 }
 .short-embed .placeholder-media { background: var(--navy-deep); }
 .short-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
-.short-link {
-  display: inline-block;
-  margin-top: 14px;
-  font-family: var(--font-display);
-  font-size: 0.82rem;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: var(--gold-deep);
-  border-bottom: 2px solid var(--gold-deep);
-}
-.short-link:hover { color: var(--navy); border-color: var(--navy); }
 
 /* ---------- Placeholder media ---------- */
 .placeholder-media {
@@ -384,13 +373,13 @@ section { position: relative; }
 }
 .placeholder-media__play {
   display: flex; align-items: center; justify-content: center;
-  width: 76px; height: 76px;
+  width: 70px; height: 70px;
   border-radius: 50%;
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.25);
   color: rgba(255,255,255,0.7);
 }
-.placeholder-media span { font-size: 0.95rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.placeholder-media span { font-size: 0.9rem; letter-spacing: 0.06em; text-transform: uppercase; }
 /* Gallery/marquee placeholders still use a bare <svg> (not the play-badge span
    above) — restore the dimmed-icon look they lost when the generic
    ".placeholder-media svg" rule was replaced by ".placeholder-media__play". */
