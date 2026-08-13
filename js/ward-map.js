@@ -5,7 +5,9 @@
   if (!mapEl || typeof maplibregl === "undefined") return;
 
   var WARD_DATA_URL = "data/wards-3-4.geojson";
-  var STYLE_URL = "https://tiles.openfreemap.org/styles/liberty";
+  /* "positron" is OpenFreeMap's muted, desaturated light basemap — matches the
+     look devvashi.ca uses instead of the busier default "liberty" style. */
+  var STYLE_URL = "https://tiles.openfreemap.org/styles/positron";
   var GOLD = "#FFB000";
   var NAVY = "#1b2a52";
 
@@ -96,14 +98,14 @@
           id: "wards-fill",
           type: "fill",
           source: "wards",
-          paint: { "fill-color": NAVY, "fill-opacity": 0.08 },
+          paint: { "fill-color": NAVY, "fill-opacity": 0.03 },
         });
 
         map.addLayer({
           id: "wards-outline",
           type: "line",
           source: "wards",
-          paint: { "line-color": GOLD, "line-width": 3 },
+          paint: { "line-color": GOLD, "line-width": 2.5 },
         });
 
         if (typeof turf !== "undefined") {

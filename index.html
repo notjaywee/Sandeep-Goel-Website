@@ -278,22 +278,31 @@
       <div class="map-layout reveal">
         <div class="map-card">
           <div id="ward-map"></div>
-          <div class="map-watermark">Sandeep Goel</div>
+          <div class="map-badge" aria-hidden="true">
+            <span class="map-badge-line map-badge-first">Sandeep Kumar</span>
+            <span class="map-badge-line map-badge-last">Goel</span>
+          </div>
           <div class="map-boundary-badge">Official Wards 3 &amp; 4 Boundary</div>
         </div>
         <div class="map-checker">
           <h3>Check Your Ward</h3>
-          <form class="lookup-form" id="lookup-form">
-            <label for="lookup-input">Address or postal code</label>
-            <div class="lookup-row">
-              <input type="text" id="lookup-input" name="lookup" placeholder="e.g. 8850 McLaughlin Rd S" autocomplete="off" required />
-              <button type="submit" class="btn btn-navy" aria-label="Check my ward">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-              </button>
-            </div>
-          </form>
-          <div class="lookup-result" id="lookup-result" role="status"></div>
+          <p class="map-checker-intro">See if your address falls within Wards 3 &amp; 4.</p>
+          <div class="lookup-card">
+            <form class="lookup-form" id="lookup-form">
+              <label for="lookup-input">Address or postal code</label>
+              <div class="lookup-row">
+                <input type="text" id="lookup-input" name="lookup" placeholder="e.g. 8850 McLaughlin Rd S" autocomplete="off" required />
+                <button type="submit" class="btn btn-navy" aria-label="Check my ward">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+                </button>
+              </div>
+            </form>
+            <div class="lookup-result" id="lookup-result" role="status"></div>
+          </div>
           <p class="lookup-privacy">The lookup runs through OpenStreetMap's free address service. The campaign never sees or stores what you type.</p>
+          <!-- Legend kept per v8 §5 flag: two distinct marker types (boundary line, landmark
+               pins) are on this map even though Dev's reference layout doesn't carry one —
+               his map may only have a single marker type. Revisit if this reads as clutter. -->
           <div class="map-legend">
             <div class="row"><span class="legend-swatch" style="background:var(--gold);"></span> Wards 3 &amp; 4 boundary</div>
             <div class="row"><span class="legend-swatch" style="background:var(--navy);"></span> Landmark pins</div>
