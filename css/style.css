@@ -705,58 +705,72 @@ section { position: relative; }
 .legend-swatch { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
 .map-attribution { font-size: 0.72rem; color: var(--ink-soft); padding-top: 6px; border-top: 1px solid var(--line); }
 
-/* ---------- Gallery ---------- */
-.gallery-section { padding: var(--space-6) 0; background: var(--surface); overflow: hidden; }
-.pull-quote {
-  max-width: 640px;
-  margin: 0 auto 56px;
-  text-align: center;
-  border: none;
+/* ---------- Gallery marquee ---------- */
+.gallery-band { padding: var(--space-5) 0; background: var(--navy); color: var(--white); overflow: hidden; }
+.gallery-band-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin-bottom: 32px;
 }
-.pull-quote p {
-  font-family: var(--font-display);
-  font-size: clamp(1.3rem, 3vw, 1.8rem);
-  color: var(--navy);
-  line-height: 1.3;
-  margin: 0;
-}
-.pull-quote cite {
-  display: block;
-  margin-top: 14px;
-  font-style: normal;
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--gold-deep);
-}
+.gallery-band-head h2 { margin: 0; color: var(--white); }
+.gallery-band-head .eyebrow { background: none; color: var(--gold); padding: 0; margin: 0; }
 
-.gallery-grid {
-  column-count: 3;
-  column-gap: 20px;
-}
-.gallery-item {
-  margin: 0 0 20px;
-  break-inside: avoid;
-  border-radius: var(--radius-sm);
+.marquee {
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4% 96%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 4% 96%, transparent);
+  border-radius: var(--radius-sm);
 }
-.gallery-item img {
-  width: 100%;
-  height: auto;
-  display: block;
-  transition: transform 0.3s ease;
+.marquee:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.marquee-track {
+  width: max-content;
+  padding: 28px 0;
+  display: flex;
+  animation: gallery-marquee 48s linear infinite;
 }
-.gallery-item:hover img { transform: scale(1.04); }
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
 
-@media (max-width: 980px) {
-  .gallery-grid { column-count: 2; }
+.marquee-card {
+  background: var(--white);
+  border-radius: 3px;
+  flex: none;
+  margin-right: 28px;
+  padding: 12px;
+  position: relative;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
+.marquee-card:nth-child(odd) { transform: rotate(-1.8deg); }
+.marquee-card:nth-child(2n) { transform: rotate(1.4deg); }
+.marquee-card:hover { z-index: 2; transform: rotate(0) translateY(-6px) scale(1.02); }
+
+.who-photo { width: 13rem; height: 16rem; border-radius: 2px; position: relative; overflow: hidden; }
+.who-photo--wide { width: 20rem; }
+.who-photo--tall { width: 13rem; }
+.who-photo-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+@media (min-width: 768px) {
+  .who-photo { height: 18rem; }
+}
+
+@keyframes gallery-marquee {
+  0% { transform: translate(0); }
+  to { transform: translate(-50%); }
+}
+
 @media (max-width: 560px) {
-  .gallery-grid { column-count: 1; }
+  .gallery-band-head { flex-direction: column; align-items: flex-start; gap: 6px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .gallery-item img { transition: none; }
+  .marquee { overflow-x: auto; }
+  .marquee-track { animation: none; }
+  .marquee-card { transition: none; }
+  .marquee-card[aria-hidden="true"] { display: none; }
 }
 
 /* ---------- Follow along (reserved) ---------- */
@@ -953,7 +967,7 @@ section { position: relative; }
   .countdown-timer { gap: 12px; }
   .countdown-timer .unit { min-width: 44px; }
   .countdown-timer .num { font-size: 1.3rem; }
-  .bio-section, .issues-section, .map-section, .gallery-section, .involve-section, .follow-section, .commitment-section, .election-band { padding: var(--space-4) 0; }
+  .bio-section, .issues-section, .map-section, .gallery-band, .involve-section, .follow-section, .commitment-section, .election-band { padding: var(--space-4) 0; }
   .signup-form { padding: 24px; }
   .contact-panel { padding: 26px; }
   .task-cards { grid-template-columns: 1fr; }
