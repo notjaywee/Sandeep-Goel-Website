@@ -760,6 +760,7 @@ section { position: relative; }
   width: max-content;
   padding: 28px 0;
   display: flex;
+  align-items: flex-start;
   animation-name: gallery-marquee;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
@@ -786,7 +787,7 @@ section { position: relative; }
 .marquee-card:has(.who-photo--tall) { padding: 2px; }
 .marquee-card:hover { z-index: 3; transform: rotate(0) translateY(-6px) scale(1.02); }
 
-.who-photo { height: var(--who-h); border-radius: 2px; position: relative; overflow: hidden; }
+.who-photo { height: var(--who-h); margin: 0; border-radius: 2px; position: relative; overflow: hidden; }
 .who-photo--wide { aspect-ratio: 3 / 2; }
 .who-photo--tall { aspect-ratio: 4 / 5; }
 .who-photo-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
