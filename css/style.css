@@ -729,9 +729,16 @@ section { position: relative; }
 .gallery-band-head h2 { margin: 0; color: var(--white); }
 .gallery-band-head .eyebrow { background: none; color: var(--gold); padding: 0; margin: 0; }
 
-.marquee {
+.marquee-stack {
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.marquee {
+  position: relative;
   overflow: hidden;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 4% 96%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 4% 96%, transparent);
@@ -742,8 +749,14 @@ section { position: relative; }
   width: max-content;
   padding: 28px 0;
   display: flex;
-  animation: gallery-marquee 96s linear infinite;
+  animation-name: gallery-marquee;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
 }
+.marquee-track--row1 { animation-duration: 110s; }
+.marquee-track--row2 { animation-duration: 85s; animation-direction: reverse; }
+.marquee-track--row3 { animation-duration: 65s; }
 .marquee:hover .marquee-track,
 .marquee:focus-within .marquee-track {
   animation-play-state: paused;

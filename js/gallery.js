@@ -8,8 +8,12 @@
     '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/>' +
     '<path d="M21 16l-5-5-4 4-3-3-6 6"/></svg>';
 
-  var track = document.getElementById("marquee-track");
-  if (!track) return;
+  var tracks = {
+    1: document.getElementById("marquee-track-1"),
+    2: document.getElementById("marquee-track-2"),
+    3: document.getElementById("marquee-track-3")
+  };
+  if (!tracks[1] && !tracks[2] && !tracks[3]) return;
 
   function buildCard(photo) {
     var li = document.createElement("li");
@@ -37,18 +41,31 @@
     return li;
   }
 
+  function renderRow(track, photos) {
+    if (!track || !photos.length) return;
+    var realCards = photos.map(buildCard);
+    realCards.forEach(function (li) { track.appendChild(li); });
+
+    realCards.forEach(function (li) {
+      var clone = li.cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      var img = clone.querySelector("img");
+      if (img) img.alt = "";
+      track.appendChild(clone);
+    });
+  }
+
   fetch(GALLERY_DATA_URL)
     .then(function (res) { return res.json(); })
     .then(function (photos) {
-      var realCards = photos.map(buildCard);
-      realCards.forEach(function (li) { track.appendChild(li); });
-
-      realCards.forEach(function (li) {
-        var clone = li.cloneNode(true);
-        clone.setAttribute("aria-hidden", "true");
-        var img = clone.querySelector("img");
-        if (img) img.alt = "";
-        track.appendChild(clone);
+      var byRow = { 1: [], 2: [], 3: [] };
+      photos.forEach(function (photo) {
+        var row = photo.row || 1;
+        if (!byRow[row]) byRow[row] = [];
+        byRow[row].push(photo);
+      });
+      Object.keys(tracks).forEach(function (row) {
+        renderRow(tracks[row], byRow[row] || []);
       });
     })
     .catch(function (err) {
