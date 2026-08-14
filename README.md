@@ -10,7 +10,10 @@ css/style.css          brand tokens, layout, components, responsive
 js/main.js              nav, countdown, scroll reveal
 js/ward-map.js          MapLibre map, ward boundary, landmarks, address lookup
 js/volunteer.js         task-card selection + Google Forms submit
+js/gallery.js           fetches data/gallery.json, renders "Out in the Ward" masonry grid
 data/wards-3-4.geojson  combined Ward 3 + 4 boundary polygon
+data/gallery.json       gallery photo manifest (file, width, height, alt) — add photos here
+images/gallery/         gallery photos referenced by data/gallery.json
 images/icons/favicon.svg
 brand_assets/            build brief + campaign literature photos
 ```
@@ -31,7 +34,8 @@ Then open the printed localhost URL. No install/build step is required.
 
 ## Known placeholders — swap before launch
 
-- **Headshot, hero video, gallery photos** — currently styled placeholder blocks. Drop real files into `images/` (same crop/aspect ratio as the placeholder containers) and swap the `<img>`/`<video>` sources in `index.html`.
+- **Headshot, hero video** — currently styled placeholder blocks. Drop real files into `images/` (same crop/aspect ratio as the placeholder containers) and swap the `<img>`/`<video>` sources in `index.html`.
+- **Gallery photos** — done. Add new photos by dropping a file in `images/gallery/` and an entry in `data/gallery.json` (file, width, height, alt); no HTML changes needed. `js/gallery.js` renders them into a masonry grid.
 - **Ward boundary polygon** (`data/wards-3-4.geojson`) — hand-built from the campaign literature's own map plus a couple of verified address geocodes, *not* pulled from an authoritative GIS source (Brampton GeoHub's dataset page is JS-rendered and its published data is dated Dec 1, 2014; OpenStreetMap Nominatim doesn't do precise street-intersection geocoding). Treat this as a close visual approximation and do a final verification pass — ideally against the City of Brampton's current official boundary file — before relying on the "Are We Neighbours?" tool as authoritative.
 - **Storefront pin** — not added; send the name/address to add a third landmark marker in `js/ward-map.js`.
 

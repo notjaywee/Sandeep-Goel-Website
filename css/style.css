@@ -381,10 +381,6 @@ section { position: relative; }
   color: rgba(255,255,255,0.7);
 }
 .placeholder-media span { font-size: 0.9rem; letter-spacing: 0.06em; text-transform: uppercase; }
-/* Gallery/marquee placeholders still use a bare <svg> (not the play-badge span
-   above) — restore the dimmed-icon look they lost when the generic
-   ".placeholder-media svg" rule was replaced by ".placeholder-media__play". */
-.gallery-marquee .placeholder-media svg { opacity: 0.7; }
 
 /* ---------- Commitment strip ---------- */
 .commitment-section { padding: var(--space-5) 0; background: var(--navy); color: var(--white); }
@@ -734,58 +730,33 @@ section { position: relative; }
   color: var(--gold-deep);
 }
 
-.gallery-marquee {
+.gallery-grid {
+  column-count: 3;
+  column-gap: 20px;
+}
+.gallery-item {
+  margin: 0 0 20px;
+  break-inside: avoid;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.gallery-item img {
   width: 100%;
-  padding: 12px 0 28px;
-  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-}
-.marquee-track {
-  display: flex;
-  align-items: flex-end;
-  gap: 28px;
-  width: max-content;
-  animation: marquee-scroll 36s linear infinite;
-}
-.gallery-marquee:hover .marquee-track,
-.gallery-marquee:focus-within .marquee-track {
-  animation-play-state: paused;
-}
-.marquee-item { flex: 0 0 auto; width: 240px; }
-.marquee-item--wide { width: 320px; }
-.marquee-item--tall { width: 210px; }
-.marquee-item:nth-child(odd) .polaroid { transform: rotate(-1.5deg); }
-.marquee-item:nth-child(even) .polaroid { transform: rotate(1.5deg); }
-
-.polaroid {
-  background: var(--white);
-  padding: 12px 12px 40px;
-  border-radius: 4px;
-  box-shadow: var(--shadow-md);
-  transition: transform 0.25s ease;
-}
-.marquee-item:hover .polaroid { transform: rotate(0deg) translateY(-4px) !important; }
-.polaroid .placeholder-media {
-  aspect-ratio: 4 / 5;
-  border-radius: 2px;
-}
-.marquee-item--wide .polaroid .placeholder-media { aspect-ratio: 3 / 2; }
-.polaroid-caption {
+  height: auto;
   display: block;
-  margin-top: 10px;
-  font-family: var(--font-display);
-  font-size: 0.78rem;
-  letter-spacing: 0.02em;
-  color: var(--ink-soft);
-  text-align: center;
+  transition: transform 0.3s ease;
 }
+.gallery-item:hover img { transform: scale(1.04); }
 
-@keyframes marquee-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+@media (max-width: 980px) {
+  .gallery-grid { column-count: 2; }
+}
+@media (max-width: 560px) {
+  .gallery-grid { column-count: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track { animation: none; overflow-x: auto; }
+  .gallery-item img { transition: none; }
 }
 
 /* ---------- Follow along (reserved) ---------- */
@@ -978,7 +949,6 @@ section { position: relative; }
 @media (max-width: 560px) {
   .hero h1 { font-size: clamp(1.7rem, 10vw, 7.5rem); }
   .hero-eyebrow { white-space: normal; text-align: center; }
-  .marquee-item, .marquee-item--wide, .marquee-item--tall { width: 190px; }
   .support-item { flex-direction: column; gap: 12px; }
   .countdown-timer { gap: 12px; }
   .countdown-timer .unit { min-width: 44px; }

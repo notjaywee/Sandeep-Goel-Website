@@ -335,27 +335,15 @@
       <div class="section-head reveal">
         <span class="eyebrow">Out in the Ward</span>
         <h2>Out in <span class="text-navy">the Ward</span></h2>
-        <p>From the nomination rally to the doorsteps of Wards 3 &amp; 4 — Sandeep and the neighbours who showed up with him. Placeholders below, real photos drop in as a like-for-like swap.</p>
+        <p>From the nomination rally to the doorsteps of Wards 3 &amp; 4 — Sandeep and the neighbours who showed up with him.</p>
       </div>
       <blockquote class="pull-quote reveal">
         <p>"Twenty-one years ago, this ward gave my family a chance to build something. I want to give that same chance to the next family who needs it."</p>
         <cite>21 years in Ward 4 (since 2005)</cite>
       </blockquote>
     </div>
-    <div class="gallery-marquee reveal">
-      <div class="marquee-track">
-        <div class="marquee-item marquee-item--wide"><div class="polaroid"><div class="placeholder-media"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5-5-4 4-3-3-6 6"/></svg></div><span class="polaroid-caption">Nomination rally</span></div></div>
-        <div class="marquee-item marquee-item--tall"><div class="polaroid"><div class="placeholder-media"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5-5-4 4-3-3-6 6"/></svg></div><span class="polaroid-caption">On the doorsteps</span></div></div>
-        <div class="marquee-item marquee-item--wide"><div class="polaroid"><div class="placeholder-media"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3V9z" fill="currentColor" stroke="none"/></svg></div><span class="polaroid-caption">Watch: rally recap</span></div></div>
-        <div class="marquee-item marquee-item--tall"><div class="polaroid"><div class="placeholder-media"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5-5-4 4-3-3-6 6"/></svg></div><span class="polaroid-caption">Neighbours &amp; friends</span></div></div>
-        <div class="marquee-item marquee-item--wide"><div class="polaroid"><div class="placeholder-media"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5-5-4 4-3-3-6 6"/></svg></div><span class="polaroid-caption">Out in Ward 4</span></div></div>
-        <!-- duplicated for a seamless loop -->
-        <div class="marquee-item marquee-item--wide" aria-hidden="true"><div class="polaroid"><div class="placeholder-media"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5-5-4 4-3-3-6 6"/></svg></div><span class="polaroid-caption">Nomination rally</span></div></div>
-        <div class="marquee-item marquee-item--tall" aria-hidden="true"><div class="polaroid"><div class="placeholder-media"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5-5-4 4-3-3-6 6"/></svg></div><span class="polaroid-caption">On the doorsteps</span></div></div>
-        <div class="marquee-item marquee-item--wide" aria-hidden="true"><div class="polaroid"><div class="placeholder-media"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3V9z" fill="currentColor" stroke="none"/></svg></div><span class="polaroid-caption">Watch: rally recap</span></div></div>
-        <div class="marquee-item marquee-item--tall" aria-hidden="true"><div class="polaroid"><div class="placeholder-media"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5-5-4 4-3-3-6 6"/></svg></div><span class="polaroid-caption">Neighbours &amp; friends</span></div></div>
-        <div class="marquee-item marquee-item--wide" aria-hidden="true"><div class="polaroid"><div class="placeholder-media"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5-5-4 4-3-3-6 6"/></svg></div><span class="polaroid-caption">Out in Ward 4</span></div></div>
-      </div>
+    <div class="container">
+      <div class="gallery-grid reveal" id="gallery-grid"></div>
     </div>
   </section>
 
@@ -516,6 +504,7 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
 <script src="js/main.js"></script>
+<script src="js/gallery.js"></script>
 <script src="js/ward-map.js"></script>
 <script src="js/volunteer.js"></script>
 </body>
