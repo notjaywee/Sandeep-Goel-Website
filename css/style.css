@@ -706,8 +706,19 @@ section { position: relative; }
 .map-attribution { font-size: 0.72rem; color: var(--ink-soft); padding-top: 6px; border-top: 1px solid var(--line); }
 
 /* ---------- Gallery marquee ---------- */
-.gallery-band { padding: var(--space-5) 0; background: var(--navy); color: var(--white); overflow: hidden; }
+.gallery-band { position: relative; padding: var(--space-5) 0; background: var(--navy); color: var(--white); overflow: hidden; }
+.gallery-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: linear-gradient(rgba(27, 42, 82, 0.85), rgba(27, 42, 82, 0.85)), url("../images/gallery-band-bg.jpg");
+  background-size: cover;
+  background-position: center;
+}
 .gallery-band-head {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
@@ -719,6 +730,8 @@ section { position: relative; }
 .gallery-band-head .eyebrow { background: none; color: var(--gold); padding: 0; margin: 0; }
 
 .marquee {
+  position: relative;
+  z-index: 1;
   overflow: hidden;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 4% 96%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 4% 96%, transparent);
@@ -729,7 +742,7 @@ section { position: relative; }
   width: max-content;
   padding: 28px 0;
   display: flex;
-  animation: gallery-marquee 48s linear infinite;
+  animation: gallery-marquee 96s linear infinite;
 }
 .marquee:hover .marquee-track,
 .marquee:focus-within .marquee-track {
@@ -741,19 +754,19 @@ section { position: relative; }
   border-radius: 3px;
   flex: none;
   margin-right: 28px;
-  padding: 12px;
+  padding: 7px;
   position: relative;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-gold);
   transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .marquee-card:nth-child(odd) { transform: rotate(-1.8deg); }
 .marquee-card:nth-child(2n) { transform: rotate(1.4deg); }
 .marquee-card:hover { z-index: 2; transform: rotate(0) translateY(-6px) scale(1.02); }
 
-.who-photo { width: 13rem; height: 16rem; border-radius: 2px; position: relative; overflow: hidden; }
-.who-photo--wide { width: 20rem; }
-.who-photo--tall { width: 13rem; }
-.who-photo-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.who-photo { height: 16rem; border-radius: 2px; position: relative; overflow: hidden; }
+.who-photo--wide { aspect-ratio: 3 / 2; }
+.who-photo--tall { aspect-ratio: 4 / 5; }
+.who-photo-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
 @media (min-width: 768px) {
   .who-photo { height: 18rem; }
 }
