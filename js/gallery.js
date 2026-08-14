@@ -7,17 +7,19 @@
     '<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6">' +
     '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/>' +
     '<path d="M21 16l-5-5-4 4-3-3-6 6"/></svg>';
+  var ROTATE_CAP_DEG = 2;
 
   var tracks = {
     1: document.getElementById("marquee-track-1"),
-    2: document.getElementById("marquee-track-2"),
-    3: document.getElementById("marquee-track-3")
+    2: document.getElementById("marquee-track-2")
   };
-  if (!tracks[1] && !tracks[2] && !tracks[3]) return;
+  if (!tracks[1] && !tracks[2]) return;
 
   function buildCard(photo) {
     var li = document.createElement("li");
     li.className = "marquee-card";
+    var rotate = (Math.random() * ROTATE_CAP_DEG * 2 - ROTATE_CAP_DEG).toFixed(2);
+    li.style.setProperty("--card-rotate", rotate + "deg");
 
     var figure = document.createElement("figure");
     figure.className = "who-photo who-photo--" + photo.ratio;
@@ -58,7 +60,7 @@
   fetch(GALLERY_DATA_URL)
     .then(function (res) { return res.json(); })
     .then(function (photos) {
-      var byRow = { 1: [], 2: [], 3: [] };
+      var byRow = { 1: [], 2: [] };
       photos.forEach(function (photo) {
         var row = photo.row || 1;
         if (!byRow[row]) byRow[row] = [];

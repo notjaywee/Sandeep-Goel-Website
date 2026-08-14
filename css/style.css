@@ -706,7 +706,17 @@ section { position: relative; }
 .map-attribution { font-size: 0.72rem; color: var(--ink-soft); padding-top: 6px; border-top: 1px solid var(--line); }
 
 /* ---------- Gallery marquee ---------- */
-.gallery-band { position: relative; padding: var(--space-5) 0; background: var(--navy); color: var(--white); overflow: hidden; }
+.gallery-band {
+  position: relative;
+  padding: var(--space-4) 0;
+  background: var(--navy);
+  color: var(--white);
+  overflow: hidden;
+  --who-h: 16rem;
+}
+@media (min-width: 768px) {
+  .gallery-band { --who-h: 18rem; }
+}
 .gallery-band::before {
   content: "";
   position: absolute;
@@ -734,7 +744,6 @@ section { position: relative; }
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 4px;
 }
 
 .marquee {
@@ -744,6 +753,8 @@ section { position: relative; }
   mask-image: linear-gradient(90deg, transparent, #000 4% 96%, transparent);
   border-radius: var(--radius-sm);
 }
+.marquee--row1 { z-index: 1; }
+.marquee--row2 { z-index: 2; margin-top: calc(var(--who-h) * -0.35); }
 .marquee:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
 .marquee-track {
   width: max-content;
@@ -754,9 +765,8 @@ section { position: relative; }
   animation-iteration-count: infinite;
   will-change: transform;
 }
-.marquee-track--row1 { animation-duration: 110s; }
-.marquee-track--row2 { animation-duration: 85s; animation-direction: reverse; }
-.marquee-track--row3 { animation-duration: 65s; }
+.marquee-track--row1 { animation-duration: 100s; }
+.marquee-track--row2 { animation-duration: 70s; animation-direction: reverse; }
 .marquee:hover .marquee-track,
 .marquee:focus-within .marquee-track {
   animation-play-state: paused;
@@ -767,22 +777,19 @@ section { position: relative; }
   border-radius: 3px;
   flex: none;
   margin-right: 28px;
-  padding: 7px;
+  padding: 3px;
   position: relative;
   box-shadow: var(--shadow-gold);
+  transform: rotate(var(--card-rotate, 0deg));
   transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.marquee-card:nth-child(odd) { transform: rotate(-1.8deg); }
-.marquee-card:nth-child(2n) { transform: rotate(1.4deg); }
-.marquee-card:hover { z-index: 2; transform: rotate(0) translateY(-6px) scale(1.02); }
+.marquee-card:has(.who-photo--tall) { padding: 2px; }
+.marquee-card:hover { z-index: 3; transform: rotate(0) translateY(-6px) scale(1.02); }
 
-.who-photo { height: 16rem; border-radius: 2px; position: relative; overflow: hidden; }
+.who-photo { height: var(--who-h); border-radius: 2px; position: relative; overflow: hidden; }
 .who-photo--wide { aspect-ratio: 3 / 2; }
 .who-photo--tall { aspect-ratio: 4 / 5; }
 .who-photo-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
-@media (min-width: 768px) {
-  .who-photo { height: 18rem; }
-}
 
 @keyframes gallery-marquee {
   0% { transform: translate(0); }
@@ -794,8 +801,9 @@ section { position: relative; }
 }
 @media (prefers-reduced-motion: reduce) {
   .marquee { overflow-x: auto; }
+  .marquee--row2 { margin-top: 0; }
   .marquee-track { animation: none; }
-  .marquee-card { transition: none; }
+  .marquee-card { transition: none; transform: none; }
   .marquee-card[aria-hidden="true"] { display: none; }
 }
 

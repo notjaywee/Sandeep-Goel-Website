@@ -12,14 +12,20 @@
     "row": 1
   },
   {
-    "file": "sandeep-goel-launch-event-28.jpg",
+    "file": "sandeep-goel-launch-event-06.jpg",
     "ratio": "wide",
-    "alt": "Group of supporters wearing campaign gear at a Sandeep Goel campaign event",
+    "alt": "Supporters posing together in front of the Sandeep Goel campaign banner",
     "row": 1
   },
   {
     "ratio": "tall",
     "placeholder": true,
+    "row": 1
+  },
+  {
+    "file": "sandeep-goel-launch-event-62.jpg",
+    "ratio": "wide",
+    "alt": "Group of community supporters at a Sandeep Goel campaign event",
     "row": 1
   },
   {
@@ -29,15 +35,27 @@
     "row": 1
   },
   {
+    "file": "sandeep-goel-launch-event-72.jpg",
+    "ratio": "wide",
+    "alt": "Large crowd of supporters gathered under a tent at a Sandeep Goel campaign event",
+    "row": 1
+  },
+  {
     "file": "sandeep-goel-launch-event-57.jpg",
     "ratio": "wide",
     "alt": "Large group of supporters posing together at a Sandeep Goel campaign event",
     "row": 2
   },
   {
-    "file": "sandeep-goel-launch-event-62.jpg",
+    "file": "sandeep-goel-web-pics-ext-02.jpg",
+    "ratio": "tall",
+    "alt": "Supporters gathered outside during a Sandeep Goel campaign community event",
+    "row": 2
+  },
+  {
+    "file": "sandeep-goel-launch-event-28.jpg",
     "ratio": "wide",
-    "alt": "Group of community supporters at a Sandeep Goel campaign event",
+    "alt": "Group of supporters wearing campaign gear at a Sandeep Goel campaign event",
     "row": 2
   },
   {
@@ -46,33 +64,15 @@
     "row": 2
   },
   {
+    "file": "sandeep-goel-launch-event-43.jpg",
+    "ratio": "wide",
+    "alt": "Supporters wearing turbans standing together at a Sandeep Goel campaign event",
+    "row": 2
+  },
+  {
     "file": "sandeep-goel-launch-event-34.jpg",
     "ratio": "wide",
     "alt": "Community members posing in front of the Sandeep Goel campaign banner",
     "row": 2
-  },
-  {
-    "file": "sandeep-goel-launch-event-06.jpg",
-    "ratio": "wide",
-    "alt": "Supporters posing together in front of the Sandeep Goel campaign banner",
-    "row": 3
-  },
-  {
-    "file": "sandeep-goel-launch-event-43.jpg",
-    "ratio": "wide",
-    "alt": "Supporters wearing turbans standing together at a Sandeep Goel campaign event",
-    "row": 3
-  },
-  {
-    "file": "sandeep-goel-web-pics-ext-02.jpg",
-    "ratio": "tall",
-    "alt": "Supporters gathered outside during a Sandeep Goel campaign community event",
-    "row": 3
-  },
-  {
-    "file": "sandeep-goel-launch-event-72.jpg",
-    "ratio": "wide",
-    "alt": "Large crowd of supporters gathered under a tent at a Sandeep Goel campaign event",
-    "row": 3
   }
 ]
