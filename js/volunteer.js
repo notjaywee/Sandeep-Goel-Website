@@ -32,6 +32,27 @@
     });
   });
 
+  /* ---------- Preselect "Take a lawn sign" on #involved ----------
+     Every "Get Involved" link on the page points at #involved. Landing there
+     (direct link, or clicking one of those links while already on the page,
+     which only fires hashchange rather than a reload) should preselect the
+     lawn sign task by default. */
+  var LAWN_SIGN_TASK = "Take a lawn sign";
+
+  function preselectLawnSign() {
+    if (selected.has(LAWN_SIGN_TASK)) return;
+    var card = taskCards.querySelector('[data-task="' + LAWN_SIGN_TASK + '"]');
+    if (!card) return;
+    card.classList.add("is-selected");
+    selected.add(LAWN_SIGN_TASK);
+    renderSelected();
+  }
+
+  if (window.location.hash === "#involved") preselectLawnSign();
+  window.addEventListener("hashchange", function () {
+    if (window.location.hash === "#involved") preselectLawnSign();
+  });
+
   function showMessage(text, isError) {
     formMsg.textContent = text;
     formMsg.style.color = isError ? "#8a5a00" : "var(--gold-deep)";
