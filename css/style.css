@@ -42,7 +42,7 @@
 
 /* ---------- Reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 16px); overflow-x: hidden; width: 100%; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 16px); overflow-x: hidden; width: 100%; touch-action: manipulation; }
 body {
   margin: 0;
   font-family: var(--font-body);
