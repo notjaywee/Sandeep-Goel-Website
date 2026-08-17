@@ -50,8 +50,11 @@
     submitBtn.disabled = true;
     submitBtn.textContent = "Submitting…";
 
+    form.elements["subject"].value = "New Sign-Up: " + form.elements["name"].value;
+
     var params = new URLSearchParams();
     params.append("form-name", "signup-form");
+    params.append("subject", form.elements["subject"].value);
     params.append("name", form.elements["name"].value);
     params.append("phone", form.elements["phone"].value);
     params.append("email", form.elements["email"].value);
