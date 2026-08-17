@@ -161,9 +161,16 @@
   var input = document.getElementById("lookup-input");
   var resultEl = document.getElementById("lookup-result");
 
-  function setResult(text, status) {
+  function setResult(text, status, showCta) {
     resultEl.textContent = text;
     resultEl.className = "lookup-result show status-" + status;
+    if (showCta) {
+      var cta = document.createElement("a");
+      cta.href = "#involved";
+      cta.className = "btn btn-primary lookup-result-cta";
+      cta.textContent = "Get Involved";
+      resultEl.appendChild(cta);
+    }
   }
 
   function isBarePostalCode(value) {
@@ -226,9 +233,9 @@
           }
 
           if (wardUnion && isInside) {
-            setResult("Good news — that address is in Wards 3 & 4! Sandeep would love your support. Scroll down to get involved.", "in");
+            setResult("Good news — that address is in Wards 3 & 4! Sandeep would love your support.", "in", true);
           } else if (wardUnion) {
-            setResult("That address looks to be outside Wards 3 & 4 — but everyone's welcome to follow along and share the campaign.", "out");
+            setResult("That address looks to be outside Wards 3 & 4 — but everyone's welcome to pitch in. Sandeep would love your support.", "out", true);
           } else {
             setResult("Found it on the map — the ward boundary is still loading, so we can't confirm which ward yet.", "out");
           }

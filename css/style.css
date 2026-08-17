@@ -450,7 +450,7 @@ section { position: relative; }
   display: grid;
   grid-template-columns: 1.3fr 1fr;
   gap: var(--space-3);
-  margin-bottom: var(--space-5);
+  margin-bottom: var(--space-2);
   align-items: stretch;
 }
 
@@ -544,6 +544,7 @@ section { position: relative; }
   padding: 24px 8px;
   border-top: 1px solid var(--line);
 }
+.support-item:first-child { border-top: none; padding-top: 0; }
 .support-item .priority-num { color: var(--navy); margin-bottom: 0; padding-top: 4px; }
 .support-item .issue-icon { margin-bottom: 0; }
 .support-item h4 { font-size: 1.02rem; text-transform: none; letter-spacing: 0; margin-bottom: 6px; color: var(--navy); }
@@ -722,6 +723,12 @@ section { position: relative; }
 .lookup-result.status-in { background: rgba(242,194,48,0.14); border: 1px solid rgba(212,164,18,0.4); color: var(--navy); }
 .lookup-result.status-out { background: var(--navy-tint); border: 1px solid var(--line); color: var(--ink-soft); }
 .lookup-result.status-error { background: #fff4e5; border: 1px solid #f0c37f; color: #8a5a00; }
+.lookup-result-cta {
+  display: inline-flex;
+  margin-top: 12px;
+  padding: 9px 18px;
+  font-size: 0.82rem;
+}
 .lookup-privacy { font-size: 0.78rem; color: var(--ink-soft); line-height: 1.5; }
 .map-legend { display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem; color: var(--ink-soft); }
 .map-legend .row { display: flex; align-items: center; gap: 8px; }
@@ -1010,7 +1017,8 @@ section { position: relative; }
 @media (max-width: 720px) {
   .nav-links { display: none; }
   .nav-toggle { display: flex; }
-  .commitment-grid { grid-template-columns: 1fr; }
+  .commitment-grid { grid-template-columns: repeat(2, 1fr); }
+  .commitment-item:nth-child(5) { grid-column: 1 / -1; }
   .field-row { grid-template-columns: 1fr; }
   .task-cards { grid-template-columns: 1fr 1fr; gap: 14px; }
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
