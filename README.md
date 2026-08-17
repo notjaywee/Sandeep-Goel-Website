@@ -44,5 +44,5 @@ Then open the printed localhost URL. No install/build step is required.
 1. Install Git (and optionally the GitHub CLI) if not already present.
 2. `git init`, commit, create a GitHub repo, and push.
 3. In Netlify: "Add new site" → "Import an existing project" → connect the GitHub repo. No build command needed; publish directory is the repo root.
-4. Volunteer form: submits to Google Forms (see the `GOOGLE_FORM` config block at the top of `js/volunteer.js`). Submissions should route to voteforsandeep@gmail.com — set this up as an email notification on the Form's Responses tab (or an onFormSubmit Apps Script on the response Sheet if the Form isn't owned by that account), since the site's fetch() call can't control where Google routes the notification.
+4. Volunteer form: submits to Google Forms (see the `GOOGLE_FORM` config block at the top of `js/volunteer.js`). Submissions route to voteforsandeep@gmail.com via the Form's own email notification setting (Responses tab), since the Form was created under that account.
 5. DNS: in GoDaddy, point votesandeepgoel.ca's DNS at Netlify using the records Netlify provides under Domain settings (GoDaddy stays the registrar).

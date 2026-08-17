@@ -3,10 +3,9 @@
 
   /* ---------- Google Forms wiring ----------
      Field set confirmed in v8 §4: name, phone, email, optional postal code,
-     Ward 3/4 checkbox. Submissions should route to voteforsandeep@gmail.com —
-     this fetch() only posts to Google's formResponse endpoint, so that routing
-     has to be set on the Form/Sheet itself (Responses -> email notifications,
-     or an onFormSubmit Apps Script), not here. */
+     Ward 3/4 checkbox. Submissions route to voteforsandeep@gmail.com via the
+     Form's own "email notifications for new responses" setting (Responses
+     tab), since the Form was created under that account. */
   var GOOGLE_FORM = {
     actionUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfbD8Mw28hL7Ln9lNWVgMiZZ6Sl4ZWfwmN9y449iy2EQctIRg/formResponse",
     entries: {
