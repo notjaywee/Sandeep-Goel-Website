@@ -65,15 +65,13 @@
   setInterval(tickCountdown, 1000);
 
   /* ---------- About section shorts embed ----------
-     TODO before launch: set VIDEO_URL to the real YouTube Shorts/video URL
-     once supplied (v8 §1). Until then the placeholder card stays as-is.
      Matches devvashi.ca's actual live "short-frame" component, which is a
      bare youtube-nocookie.com iframe in this same wrapper — not the
      avatar/title-overlay/play-button/share-icon card described in the v8
      spec text. Flagging this: the spec's written description doesn't match
      what's actually live on the reference site. */
   (function () {
-    var VIDEO_URL = ""; // e.g. "https://www.youtube.com/shorts/XXXXXXXXXXX"
+    var VIDEO_URL = "https://youtube.com/shorts/nqTzQxbA7LM";
     var embedEl = document.getElementById("short-embed");
     if (!embedEl || !VIDEO_URL) return;
 
