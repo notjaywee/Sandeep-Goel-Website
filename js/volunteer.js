@@ -2,22 +2,18 @@
   "use strict";
 
   /* ---------- Google Forms wiring ----------
-     TODO before launch: replace FORM_ACTION_URL with the real form's formResponse
-     endpoint (open the form -> the three-dot menu -> "Get pre-filled link" is the
-     easiest way to read off the real action URL and entry IDs), and replace each
-     ENTRY id below with the matching entry.NNNNNNNNN name from that form.
      Field set confirmed in v8 §4: name, phone, email, optional postal code,
      Ward 3/4 checkbox. Submission destination (voteforsandeep@gmail.com vs. the
      Form's own response Sheet) still needs confirming with Sandeep's team. */
   var GOOGLE_FORM = {
-    actionUrl: "https://docs.google.com/forms/d/e/REPLACE_WITH_FORM_ID/formResponse",
+    actionUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfbD8Mw28hL7Ln9lNWVgMiZZ6Sl4ZWfwmN9y449iy2EQctIRg/formResponse",
     entries: {
-      name: "entry.REPLACE_ME",
-      phone: "entry.REPLACE_ME",
-      email: "entry.REPLACE_ME",
-      livesInWard: "entry.REPLACE_ME",
-      postalCode: "entry.REPLACE_ME",
-      tasks: "entry.REPLACE_ME",
+      name: "entry.571925108",
+      phone: "entry.149487316",
+      email: "entry.1395770416",
+      livesInWard: "entry.193922718",
+      postalCode: "entry.1585690799",
+      tasks: "entry.1699241462",
     },
   };
   var GOOGLE_FORM_READY = GOOGLE_FORM.actionUrl.indexOf("REPLACE_WITH_FORM_ID") === -1;
