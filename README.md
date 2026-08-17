@@ -9,7 +9,7 @@ index.html            all sections
 css/style.css          brand tokens, layout, components, responsive
 js/main.js              nav, countdown, scroll reveal
 js/ward-map.js          MapLibre map, ward boundary, landmarks, address lookup
-js/volunteer.js         task-card selection + Google Forms submit
+js/volunteer.js         task-card selection + Netlify Forms submit
 js/gallery.js           fetches data/gallery.json, renders "Out in the Ward" masonry grid
 data/wards-3-4.geojson  combined Ward 3 + 4 boundary polygon
 data/gallery.json       gallery photo manifest (file, width, height, alt) — add photos here
@@ -44,5 +44,5 @@ Then open the printed localhost URL. No install/build step is required.
 1. Install Git (and optionally the GitHub CLI) if not already present.
 2. `git init`, commit, create a GitHub repo, and push.
 3. In Netlify: "Add new site" → "Import an existing project" → connect the GitHub repo. No build command needed; publish directory is the repo root.
-4. Volunteer form: submits to Google Forms (see the `GOOGLE_FORM` config block at the top of `js/volunteer.js`). Submissions route to voteforsandeep@gmail.com via the Form's own email notification setting (Responses tab), since the Form was created under that account.
+4. Volunteer form: submits to Netlify Forms (see `js/volunteer.js` and the `signup-form` `<form>` in `index.html`). Netlify only detects the form by scanning the live deployed HTML at build time, so it won't show up in the dashboard's Forms tab until after a deploy. To email the campaign on each submission: Forms tab → Settings and usage → Form notifications → Add notification → Email notification → voteforsandeep@gmail.com.
 5. DNS: in GoDaddy, point votesandeepgoel.ca's DNS at Netlify using the records Netlify provides under Domain settings (GoDaddy stays the registrar).

@@ -394,8 +394,12 @@
       </div>
 
       <div class="involve-grid reveal">
-        <!-- Submits to Google Forms — see GOOGLE_FORM config block at the top of js/volunteer.js. -->
-        <form class="signup-form" id="signup-form">
+        <!-- Submits to Netlify Forms — see js/volunteer.js. -->
+        <form class="signup-form" id="signup-form" name="signup-form" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="signup-form">
+          <p style="display:none">
+            <label>Don't fill this out: <input name="bot-field"></label>
+          </p>
           <h3>Sign Me Up</h3>
           <p class="hint">Fill in your details and we'll follow up about the ways you selected above.</p>
 
