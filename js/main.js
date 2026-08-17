@@ -71,7 +71,7 @@
      spec text. Flagging this: the spec's written description doesn't match
      what's actually live on the reference site. */
   (function () {
-    var VIDEO_URL = "https://youtube.com/shorts/nqTzQxbA7LM";
+    var VIDEO_URL = ""; // intentionally empty — real vertical video coming in a later round
     var embedEl = document.getElementById("short-embed");
     if (!embedEl || !VIDEO_URL) return;
 
@@ -105,5 +105,19 @@
     revealEls.forEach(function (el) { observer.observe(el); });
   } else {
     revealEls.forEach(function (el) { el.classList.add("is-visible"); });
+  }
+
+  /* ---------- Pause gallery marquee tracks when off-screen ---------- */
+  var galleryBand = document.querySelector(".gallery-band");
+  if (galleryBand && "IntersectionObserver" in window) {
+    var marqueeTracks = document.querySelectorAll(".marquee-track");
+    var marqueeObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        marqueeTracks.forEach(function (t) {
+          t.classList.toggle("is-offscreen", !entry.isIntersecting);
+        });
+      });
+    }, { threshold: 0 });
+    marqueeObserver.observe(galleryBand);
   }
 })();

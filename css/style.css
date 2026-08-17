@@ -204,6 +204,17 @@ section { position: relative; }
 }
 .nav-wordmark { flex-shrink: 0; }
 .nav-toggle:focus-visible { outline: 2px solid var(--gold); }
+.nav-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.nav-cta-mobile { display: none; }
+@media (max-width: 720px) {
+  .nav-cta-mobile { display: inline-flex; }
+}
+@media (max-width: 400px) {
+  .site-nav .container { padding: 0 12px; }
+  .nav-actions { gap: 6px; }
+  .site-nav .nav-cta-mobile.btn { padding: 6px 10px; font-size: 10px; letter-spacing: 0.01em; }
+  .nav-toggle { width: 40px; height: 40px; min-width: 40px; }
+}
 
 /* ---------- Hero ---------- */
 .hero {
@@ -327,7 +338,7 @@ section { position: relative; }
 .bio-text h2 { font-size: clamp(2.2rem, 5.5vw, 4.2rem); margin-bottom: 22px; }
 .bio-text p { color: var(--ink-soft); margin-bottom: 16px; font-size: 1.05rem; }
 .bio-text p:last-child { margin-bottom: 0; }
-.bio-text .btn { margin-top: var(--space-2); }
+.bio-text .btn { margin-top: var(--space-2); white-space: normal; text-align: center; }
 
 /* ---------- Short-frame (vertical video embed) ---------- */
 .short-frame { width: 100%; max-width: 560px; margin: 0 auto; }
@@ -339,6 +350,12 @@ section { position: relative; }
      just read as a stray gap. */
   .short-frame { margin: 44px auto 0; }
 }
+
+/* TEMP — remove both rules below when the real video drops in; restores the two-column
+   bio-grid and the short-frame card automatically. Single place to find and delete. */
+.short-frame { display: none; }
+.bio-grid { grid-template-columns: 1fr; }
+
 .short-visual { position: relative; }
 .short-shadow {
   position: absolute;
@@ -773,6 +790,7 @@ section { position: relative; }
 .marquee:focus-within .marquee-track {
   animation-play-state: paused;
 }
+.marquee-track.is-offscreen { animation-play-state: paused; }
 
 .marquee-card {
   background: var(--white);
@@ -1005,7 +1023,7 @@ section { position: relative; }
   .bio-section, .issues-section, .map-section, .gallery-band, .involve-section, .follow-section, .commitment-section, .election-band { padding: var(--space-4) 0; }
   .signup-form { padding: 24px; }
   .contact-panel { padding: 26px; }
-  .task-cards { grid-template-columns: 1fr; }
+  .task-cards { grid-template-columns: repeat(2, 1fr); gap: 12px; }
 }
 
 /* ---------- Social icon link override (must win over .footer-col a and .nav-links a) ---------- */
