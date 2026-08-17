@@ -162,8 +162,12 @@
   var resultEl = document.getElementById("lookup-result");
 
   function setResult(text, status, showCta) {
-    resultEl.textContent = text;
+    resultEl.innerHTML = "";
     resultEl.className = "lookup-result show status-" + status;
+    var msg = document.createElement("p");
+    msg.className = "lookup-result-text";
+    msg.textContent = text;
+    resultEl.appendChild(msg);
     if (showCta) {
       var cta = document.createElement("a");
       cta.href = "#involved";

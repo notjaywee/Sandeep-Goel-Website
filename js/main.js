@@ -71,7 +71,7 @@
      spec text. Flagging this: the spec's written description doesn't match
      what's actually live on the reference site. */
   (function () {
-    var VIDEO_URL = ""; // intentionally empty — real vertical video coming in a later round
+    var VIDEO_URL = "https://youtube.com/shorts/nqTzQxbA7LM";
     var embedEl = document.getElementById("short-embed");
     if (!embedEl || !VIDEO_URL) return;
 

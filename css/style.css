@@ -356,11 +356,6 @@ section { position: relative; }
   .short-frame { margin: 44px auto 0; }
 }
 
-/* TEMP — remove both rules below when the real video drops in; restores the two-column
-   bio-grid and the short-frame card automatically. Single place to find and delete. */
-.short-frame { display: none; }
-.bio-grid { grid-template-columns: 1fr; }
-
 .short-visual { position: relative; }
 .short-shadow {
   position: absolute;
@@ -385,6 +380,10 @@ section { position: relative; }
 }
 .short-embed .placeholder-media { background: var(--navy-deep); }
 .short-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
+@media (max-width: 980px) {
+  .short-shadow { inset: 10px -10px -10px 10px; }
+  .short-mat { padding: 10px; }
+}
 
 /* ---------- Placeholder media ---------- */
 .placeholder-media {
@@ -723,6 +722,7 @@ section { position: relative; }
 .lookup-result.status-in { background: rgba(242,194,48,0.14); border: 1px solid rgba(212,164,18,0.4); color: var(--navy); }
 .lookup-result.status-out { background: var(--navy-tint); border: 1px solid var(--line); color: var(--ink-soft); }
 .lookup-result.status-error { background: #fff4e5; border: 1px solid #f0c37f; color: #8a5a00; }
+.lookup-result-text { margin: 0; }
 .lookup-result-cta {
   display: inline-flex;
   margin-top: 12px;
@@ -1003,7 +1003,7 @@ section { position: relative; }
    Responsive
    ============================================================ */
 @media (max-width: 980px) {
-  .bio-grid { grid-template-columns: 1fr; }
+  .bio-grid { grid-template-columns: 1fr; gap: var(--space-3); }
   .commitment-grid { grid-template-columns: repeat(3, 1fr); }
   .priorities-row { grid-template-columns: 1fr; }
   .priority-featured-watermark { font-size: 10rem; }
