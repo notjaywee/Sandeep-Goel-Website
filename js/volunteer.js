@@ -8,6 +8,62 @@
   var formMsg = document.getElementById("form-msg");
   if (!taskCards || !form) return;
 
+  var thankyouOverlay = document.getElementById("thankyouOverlay");
+  var thankyouName = document.getElementById("thankyouName");
+  var thankyouClose = document.getElementById("thankyouClose");
+  var thankyouDismiss = document.getElementById("thankyouDismiss");
+  var shareCopyBtn = document.getElementById("shareCopy");
+  var shareCopyLabel = document.getElementById("shareCopyLabel");
+
+  var SITE_URL = "https://votesandeepgoel.ca/";
+  var SHARE_TEXT = "I just signed up to help Sandeep Goel's campaign for Wards 3 & 4 in Brampton — join me:";
+
+  function hideThankYouOverlay() {
+    thankyouOverlay.classList.remove("is-visible");
+    thankyouOverlay.setAttribute("aria-hidden", "true");
+  }
+
+  function showThankYouOverlay(name) {
+    var firstName = (name || "").trim().split(" ")[0];
+    thankyouName.textContent = firstName ? ", " + firstName : "";
+
+    var encodedUrl = encodeURIComponent(SITE_URL);
+    var encodedText = encodeURIComponent(SHARE_TEXT);
+
+    document.getElementById("shareFacebook").href = "https://www.facebook.com/sharer/sharer.php?u=" + encodedUrl;
+    document.getElementById("shareX").href = "https://twitter.com/intent/tweet?url=" + encodedUrl + "&text=" + encodedText;
+    document.getElementById("shareWhatsapp").href = "https://wa.me/?text=" + encodedText + "%20" + encodedUrl;
+
+    thankyouOverlay.classList.add("is-visible");
+    thankyouOverlay.setAttribute("aria-hidden", "false");
+  }
+
+  if (thankyouClose) thankyouClose.addEventListener("click", hideThankYouOverlay);
+  if (thankyouDismiss) thankyouDismiss.addEventListener("click", hideThankYouOverlay);
+
+  if (shareCopyBtn) {
+    shareCopyBtn.addEventListener("click", function () {
+      function resetLabel() { shareCopyLabel.textContent = "Copy Link"; }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(SITE_URL).then(function () {
+          shareCopyLabel.textContent = "Copied!";
+          setTimeout(resetLabel, 2000);
+        });
+      } else {
+        var tempInput = document.createElement("textarea");
+        tempInput.value = SITE_URL;
+        tempInput.style.position = "fixed";
+        tempInput.style.opacity = "0";
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        try { document.execCommand("copy"); } catch (err) {}
+        document.body.removeChild(tempInput);
+        shareCopyLabel.textContent = "Copied!";
+        setTimeout(resetLabel, 2000);
+      }
+    });
+  }
+
   var selected = new Set();
 
   function renderSelected() {
@@ -90,11 +146,12 @@
     })
       .then(function (res) {
         if (!res.ok) throw new Error("Submission failed");
-        showMessage("Thanks for signing up — we'll be in touch soon!", false);
+        var submitterName = form.elements["name"].value;
         form.reset();
         selected.clear();
         taskCards.querySelectorAll(".task-card").forEach(function (c) { c.classList.remove("is-selected"); });
         renderSelected();
+        showThankYouOverlay(submitterName);
       })
       .catch(function () {
         showMessage("Something went wrong submitting the form. Please try again in a moment.", true);
