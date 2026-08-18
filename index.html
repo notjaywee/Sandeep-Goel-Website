@@ -61,11 +61,13 @@
   <!-- ===================== HERO ===================== -->
   <section class="hero">
     <div class="hero-media">
-      <!-- Vertical loop for mobile, horizontal loop for everything else. -->
-      <video class="hero-video" autoplay muted loop playsinline aria-hidden="true">
-        <source src="images/video/vertical-hero-loop.mp4" media="(max-width: 720px)" type="video/mp4">
-        <source src="images/video/hero-loop.mp4" type="video/mp4">
-      </video>
+      <!-- Vertical loop for mobile, horizontal loop for everything else. Picked via JS, not <source media>, since mobile browsers don't reliably honor that attribute on <video>. -->
+      <video class="hero-video" autoplay muted loop playsinline aria-hidden="true" id="hero-video"></video>
+      <script>
+        document.getElementById('hero-video').src = window.matchMedia('(max-width: 720px)').matches
+          ? 'images/video/vertical-hero-loop.mp4'
+          : 'images/video/hero-loop.mp4';
+      </script>
     </div>
     <div class="container hero-content">
       <span class="hero-eyebrow">City of Brampton Regional Councillor Candidate for Wards 3 &amp; 4</span>
