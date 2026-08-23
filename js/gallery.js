@@ -15,6 +15,14 @@
   };
   if (!tracks[1] && !tracks[2]) return;
 
+  Object.keys(tracks).forEach(function (row) {
+    var marquee = tracks[row] && tracks[row].closest(".marquee");
+    if (!marquee) return;
+    marquee.addEventListener("mousedown", function (e) {
+      if (e.target.closest(".marquee-card")) e.preventDefault();
+    });
+  });
+
   function buildCard(photo) {
     var li = document.createElement("li");
     li.className = "marquee-card";
@@ -57,34 +65,6 @@
     });
   }
 
-  var CLICK_PAUSE_MS = 4000;
-
-  function wireClickPause(track) {
-    if (!track) return;
-    var resumeTimer = null;
-
-    function resume() {
-      track.classList.remove("is-click-paused");
-      clearTimeout(resumeTimer);
-      resumeTimer = null;
-    }
-
-    function pause() {
-      track.classList.add("is-click-paused");
-      clearTimeout(resumeTimer);
-      resumeTimer = setTimeout(resume, CLICK_PAUSE_MS);
-    }
-
-    track.addEventListener("click", function (e) {
-      if (!e.target.closest(".marquee-card")) return;
-      if (track.classList.contains("is-click-paused")) {
-        resume();
-      } else {
-        pause();
-      }
-    });
-  }
-
   fetch(GALLERY_DATA_URL)
     .then(function (res) { return res.json(); })
     .then(function (photos) {
@@ -96,7 +76,6 @@
       });
       Object.keys(tracks).forEach(function (row) {
         renderRow(tracks[row], byRow[row] || []);
-        wireClickPause(tracks[row]);
       });
     })
     .catch(function (err) {

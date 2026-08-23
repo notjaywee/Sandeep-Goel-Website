@@ -784,17 +784,10 @@ section { position: relative; }
   align-items: flex-end;
   justify-content: space-between;
   gap: 8px 16px;
-  margin-bottom: 12px;
+  margin-bottom: 32px;
 }
 .gallery-band-head h2 { margin: 0; color: var(--white); }
 .gallery-band-head .eyebrow { background: none; color: var(--gold); padding: 0; margin: 0; }
-.gallery-band-hint {
-  position: relative;
-  z-index: 1;
-  margin: 0 auto 24px;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.85rem;
-}
 
 .marquee-stack {
   position: relative;
@@ -825,12 +818,15 @@ section { position: relative; }
 }
 .marquee-track--row1 { animation-duration: 100s; }
 .marquee-track--row2 { animation-duration: 70s; animation-direction: reverse; }
-.marquee:hover .marquee-track,
 .marquee:focus-within .marquee-track {
   animation-play-state: paused;
 }
+@media (hover: hover) and (pointer: fine) {
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+}
 .marquee-track.is-offscreen { animation-play-state: paused; }
-.marquee-track.is-click-paused { animation-play-state: paused; }
 
 .marquee-card {
   background: var(--white);
@@ -842,7 +838,6 @@ section { position: relative; }
   box-shadow: var(--shadow-gold);
   transform: rotate(var(--card-rotate, 0deg));
   transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
-  cursor: pointer;
 }
 .marquee-card:hover { z-index: 3; transform: rotate(0) translateY(-6px) scale(1.02); }
 
