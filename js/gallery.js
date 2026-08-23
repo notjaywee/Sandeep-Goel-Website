@@ -38,13 +38,21 @@
       placeholder.innerHTML = PLACEHOLDER_ICON;
       figure.appendChild(placeholder);
     } else {
+      var picture = document.createElement("picture");
+      var source = document.createElement("source");
+      source.type = "image/avif";
+      source.srcset = IMAGE_BASE + photo.file.replace(/\.jpg$/i, ".avif");
+      picture.appendChild(source);
+
       var img = document.createElement("img");
       img.className = "who-photo-media";
       img.src = IMAGE_BASE + photo.file;
       img.alt = photo.alt;
       img.loading = "lazy";
       img.decoding = "async";
-      figure.appendChild(img);
+      picture.appendChild(img);
+
+      figure.appendChild(picture);
     }
 
     li.appendChild(figure);

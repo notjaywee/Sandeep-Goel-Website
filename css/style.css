@@ -844,6 +844,7 @@ section { position: relative; }
 .who-photo { height: var(--who-h); margin: 0; border-radius: 2px; position: relative; overflow: hidden; }
 .who-photo--wide { aspect-ratio: 3 / 2; }
 .who-photo--tall { aspect-ratio: 4 / 5; }
+.who-photo picture { display: block; width: 100%; height: 100%; }
 .who-photo-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
 
 @keyframes gallery-marquee {
