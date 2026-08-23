@@ -18,8 +18,9 @@
     "row": 1
   },
   {
+    "file": "sandeep-goel-web-pics-ext-03.jpg",
     "ratio": "tall",
-    "placeholder": true,
+    "alt": "Volunteer laughing while canvassing door-to-door for the Sandeep Goel campaign",
     "row": 1
   },
   {
@@ -41,6 +42,12 @@
     "row": 1
   },
   {
+    "file": "sandeep-goel-web-pics-ext-05.jpg",
+    "ratio": "tall",
+    "alt": "Volunteer canvassing a neighbourhood street during the Sandeep Goel campaign",
+    "row": 1
+  },
+  {
     "file": "sandeep-goel-launch-event-57.jpg",
     "ratio": "wide",
     "alt": "Large group of supporters posing together at a Sandeep Goel campaign event",
@@ -59,8 +66,9 @@
     "row": 2
   },
   {
+    "file": "sandeep-goel-web-pics-ext-04.jpg",
     "ratio": "tall",
-    "placeholder": true,
+    "alt": "Volunteer and resident talking on a porch during Sandeep Goel campaign door-to-door canvassing",
     "row": 2
   },
   {
@@ -73,6 +81,12 @@
     "file": "sandeep-goel-launch-event-34.jpg",
     "ratio": "wide",
     "alt": "Community members posing in front of the Sandeep Goel campaign banner",
+    "row": 2
+  },
+  {
+    "file": "sandeep-goel-web-pics-ext-06.jpg",
+    "ratio": "tall",
+    "alt": "Group of volunteers holding campaign flyers before canvassing for Sandeep Goel",
     "row": 2
   }
 ]
