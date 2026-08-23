@@ -865,6 +865,7 @@ section { position: relative; }
 
 /* ---------- Follow along (reserved) ---------- */
 .follow-section { padding: var(--space-6) 0; background: var(--navy-tint); }
+.follow-section .eyebrow { background: var(--white); }
 .follow-embed {
   min-height: 220px;
 }
