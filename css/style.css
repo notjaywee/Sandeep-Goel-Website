@@ -442,7 +442,9 @@ section { position: relative; }
 .placeholder-media span { font-size: 0.9rem; letter-spacing: 0.06em; text-transform: uppercase; }
 
 /* ---------- Commitment strip ---------- */
-.commitment-section { padding: var(--space-5) 0; background: var(--navy); color: var(--white); }
+.commitment-section { padding: var(--space-4) 0; background: var(--navy); color: var(--white); }
+.commitment-section .section-head { margin-bottom: 40px; }
+.commitment-section h2 { font-size: clamp(1.9rem, 4.5vw, 3.4rem); }
 .commitment-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -450,15 +452,15 @@ section { position: relative; }
 }
 .commitment-item { text-align: center; }
 .commitment-icon {
-  width: 62px; height: 62px;
+  width: 52px; height: 52px;
   border-radius: 50%;
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.18);
   display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 16px;
+  margin: 0 auto 12px;
   color: var(--gold);
 }
-.commitment-icon svg { width: 26px; height: 26px; }
+.commitment-icon svg { width: 22px; height: 22px; }
 .commitment-item p { font-size: 0.95rem; color: rgba(255,255,255,0.85); }
 
 /* ---------- Priorities (lead + support) ---------- */
