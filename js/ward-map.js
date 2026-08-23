@@ -55,6 +55,8 @@
       note: "8027 Churchville Road — Ward 4 anchor",
       lng: -79.7621030,
       lat: 43.6407125,
+      /* nudged down so its badge clears the nearby Eldorado Park pin at small viewport widths */
+      pixelOffset: [0, 16],
     },
   ];
 
@@ -103,7 +105,7 @@
     var popup = new maplibregl.Popup({ offset: 14 }).setHTML(
       "<strong>" + landmark.name + "</strong><br>" + landmark.note
     );
-    new maplibregl.Marker({ element: el, anchor: "left" })
+    new maplibregl.Marker({ element: el, anchor: "left", offset: landmark.pixelOffset || [0, 0] })
       .setLngLat([landmark.lng, landmark.lat])
       .setPopup(popup)
       .addTo(map);
