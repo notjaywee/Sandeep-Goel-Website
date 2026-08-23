@@ -100,7 +100,7 @@ section { position: relative; }
 .btn-gold { background: var(--gold); color: var(--navy-deep); }
 .btn-gold:hover { background: var(--gold-deep); box-shadow: var(--shadow-gold); }
 .btn-outline-gold { background: transparent; color: var(--gold); border-color: var(--gold); }
-.btn-outline-gold:hover { background: rgba(255,176,0,0.12); box-shadow: var(--shadow-gold); }
+.btn-outline-gold:hover { background: var(--gold); color: var(--navy-deep); box-shadow: var(--shadow-gold); }
 .btn-block { width: 100%; justify-content: center; }
 
 /* ---------- Eyebrow / section headers ---------- */
@@ -617,7 +617,8 @@ section { position: relative; }
 /* ---------- Election info ---------- */
 .election-section { padding: 0; }
 .election-band { background: var(--navy-deep); color: var(--white); padding: var(--space-5) 0; }
-.election-cta { margin-top: 28px; }
+.election-cta { margin-top: 32px; }
+.election-cta .btn { padding: 15px 32px; font-size: 1rem; font-weight: 600; }
 .election-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
