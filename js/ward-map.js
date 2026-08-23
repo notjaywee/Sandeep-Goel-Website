@@ -44,6 +44,18 @@
       lng: -79.7161397,
       lat: 43.694299,
     },
+    {
+      name: "Shri Gauri Shankar Mandir",
+      note: "1075 Queen Street West — Ward 4 anchor",
+      lng: -79.7827478,
+      lat: 43.6651833,
+    },
+    {
+      name: "Maa Chintpurni Mandir (Shrijidham)",
+      note: "8027 Churchville Road — Ward 4 anchor",
+      lng: -79.7621030,
+      lat: 43.6407125,
+    },
   ];
 
   var map = new maplibregl.Map({
