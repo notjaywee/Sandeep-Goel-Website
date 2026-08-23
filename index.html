@@ -432,10 +432,12 @@
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">Follow Along</span>
-        <h2>Follow <span class="text-gold">Along</span></h2>
-        <p>The campaign's social feed lands here soon.</p>
+        <h2>Connect With Sandeep,<br> <span class="text-gold">Then Follow Along.</span></h2>
+        <p>The latest from Sandeep's Instagram, right here.</p>
       </div>
-      <div class="follow-placeholder reveal" aria-hidden="true"></div>
+      <div class="follow-embed reveal">
+        <div data-behold-id="BmumULgBiL4Y1PjbMjNC"></div>
+      </div>
     </div>
   </section>
 
@@ -592,6 +594,17 @@
 <script src="js/gallery.js"></script>
 <script src="js/ward-map.js"></script>
 <script src="js/volunteer.js" defer></script>
+
+<script>
+  (function() {
+    if (window.__bhldScript) return;
+    window.__bhldScript = true;
+    const d = document, s = d.createElement("script");
+    s.type = "module";
+    s.src = "https://w.behold.so/widget.js";
+    setTimeout(() => { d.head.append(s); }, 0);
+  })();
+</script>
 
 <div class="thankyou-overlay" id="thankyouOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="thankyouHeading">
   <button type="button" class="thankyou-close" id="thankyouClose" aria-label="Close">×</button>
