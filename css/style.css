@@ -867,10 +867,10 @@ section { position: relative; }
 .follow-section { padding: var(--space-6) 0; background: var(--navy-tint); }
 .follow-embed {
   min-height: 220px;
-  border-radius: var(--radius-lg);
-  background: var(--white);
-  padding: 24px;
-  box-shadow: var(--shadow-md);
+}
+.follow-cta {
+  text-align: center;
+  margin-top: 24px;
 }
 
 /* ---------- Get involved / contact ---------- */
