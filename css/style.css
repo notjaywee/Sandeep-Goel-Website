@@ -545,6 +545,8 @@ section { position: relative; }
 .priorities-compact {
   display: flex;
   flex-direction: column;
+  padding-top: 40px; /* matches .priority-featured's 40px top padding, line 497,
+                         so "02" lines up with "01"'s label instead of sitting above it */
 }
 .priority-compact-item {
   display: flex;
@@ -1050,6 +1052,7 @@ section { position: relative; }
   .bio-grid { grid-template-columns: 1fr; gap: var(--space-3); }
   .commitment-grid { grid-template-columns: repeat(3, 1fr); }
   .priorities-row { grid-template-columns: 1fr; }
+  .priorities-compact { padding-top: 0; }
   .priority-featured-watermark { font-size: 10rem; }
   .election-grid { grid-template-columns: 1fr; }
   .map-layout { grid-template-columns: 1fr; }
