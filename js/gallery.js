@@ -57,6 +57,34 @@
     });
   }
 
+  var CLICK_PAUSE_MS = 4000;
+
+  function wireClickPause(track) {
+    if (!track) return;
+    var resumeTimer = null;
+
+    function resume() {
+      track.classList.remove("is-click-paused");
+      clearTimeout(resumeTimer);
+      resumeTimer = null;
+    }
+
+    function pause() {
+      track.classList.add("is-click-paused");
+      clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(resume, CLICK_PAUSE_MS);
+    }
+
+    track.addEventListener("click", function (e) {
+      if (!e.target.closest(".marquee-card")) return;
+      if (track.classList.contains("is-click-paused")) {
+        resume();
+      } else {
+        pause();
+      }
+    });
+  }
+
   fetch(GALLERY_DATA_URL)
     .then(function (res) { return res.json(); })
     .then(function (photos) {
@@ -68,6 +96,7 @@
       });
       Object.keys(tracks).forEach(function (row) {
         renderRow(tracks[row], byRow[row] || []);
+        wireClickPause(tracks[row]);
       });
     })
     .catch(function (err) {
