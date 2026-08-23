@@ -68,6 +68,27 @@
     attributionControl: true,
   });
 
+  /* MapLibre's attribution control opens pre-expanded by default whenever it's in
+     "compact" mode (maplibregl-compact) — that's the library's own default, not
+     something set here. In this embed the map container is narrow enough that
+     compact mode is always active, so on load this collides with the "Official
+     Wards 3 & 4 Boundary" badge in the opposite bottom corner. Force it collapsed
+     to just the "i" toggle immediately, which is the same end state the library
+     gives you automatically after a user's first drag — just applied on load
+     instead of waiting for that first interaction. Driven by the actual class the
+     library applies rather than re-checking a width threshold ourselves, so this
+     stays correct even if the container's effective width changes. */
+  function collapseAttribution() {
+    var attrib = mapEl.querySelector(".maplibregl-ctrl-attrib");
+    if (attrib && attrib.classList.contains("maplibregl-compact")) {
+      attrib.classList.remove("maplibregl-compact-show");
+      attrib.removeAttribute("open");
+    }
+  }
+  collapseAttribution();
+  map.on("load", collapseAttribution);
+  map.on("resize", collapseAttribution);
+
   map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
 
   /* ---------- Zoom-reset control ---------- */
